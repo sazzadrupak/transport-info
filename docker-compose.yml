@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: app
+    stdin_open: true
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+        mode: host
+    build:
+      context: .
+    volumes:
+      - '/app/node_modules'
+      - '.:/app'
+    environment:
+      - NODE_ENV=development
+    networks:
+      - webnet
+networks:
+  webnet:

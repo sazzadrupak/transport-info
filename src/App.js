@@ -1,25 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import config from './config';
+import NotFound from './components/notFound';
+import NavBar from './components/navBar';
 import './App.css';
+import Search from './components/search';
+
+const client = new ApolloClient({
+  uri: config.baseUrl,
+  request: async (operation) => {
+    const token = window.localStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        Authorization: token || '',
+      },
+    });
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <React.Fragment>
+        <NavBar />
+        <main className="container">
+          <Switch>
+            <Route path="/" component={Search}></Route>
+            <Route path="/not-found" component={NotFound}></Route>
+            <Redirect from="/" exact to="/" />
+            <Redirect to="not-found" />
+          </Switch>
+        </main>
+      </React.Fragment>
+    </ApolloProvider>
   );
 }
 
