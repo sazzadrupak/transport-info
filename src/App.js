@@ -9,7 +9,7 @@ import './App.css';
 import Search from './components/search';
 
 const client = new ApolloClient({
-  uri: config.baseUrl,
+  uri: config.graphqlUrl,
   request: async (operation) => {
     const token = window.localStorage.getItem('token');
     operation.setContext({
