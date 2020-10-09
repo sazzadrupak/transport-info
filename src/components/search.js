@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import { QUERY_GET_TRANSPORTS } from '../graphql/queries';
 import { useLazyQuery } from 'react-apollo';
@@ -48,7 +48,6 @@ const Search = () => {
           .then((data) => {
             if (data.features) {
               let addressList = data.features.map((element) => {
-                // console.log(element);
                 return element;
               });
               setAddresses(addressList);
