@@ -1,5 +1,7 @@
 FROM node:alpine
 
+RUN npm install -g serve
+
 ENV NODE_ENV=production
 
 WORKDIR /app
