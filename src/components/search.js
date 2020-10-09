@@ -8,7 +8,7 @@ import config from '../config';
 const Search = () => {
   const [
     getTransportInfosFromServer,
-    { loading, data: transportInfos, error },
+    // { loading, data: transportInfos, error },
   ] = useLazyQuery(QUERY_GET_TRANSPORTS, {
     context: {
       headers: {
@@ -66,14 +66,27 @@ const Search = () => {
     );
   }, [flexDirection]);
 
-  useEffect(() => {
-    console.log({ type: 'addess selected' });
-    getTransportInfo();
-  }, [selectedAddess]);
+  const getTransportInfo = () => {
+    const { efficodeAddress } = config;
+    if (selectedAddess) {
+      let fromAddress;
+      let toAddress;
+      if (userAddressFlexStatus === 'up') {
+        fromAddress = selectedAddess;
+        toAddress = efficodeAddress;
+      } else if (userAddressFlexStatus === 'bottom') {
+        fromAddress = efficodeAddress;
+        toAddress = selectedAddess;
+      }
+      getTransportInfosFromServer({
+        variables: { fromAddress: fromAddress, toAddress: toAddress },
+      });
+    }
+  };
 
-  useEffect(() => {
-    getTransportInfo();
-  }, [userAddressFlexStatus]);
+  useEffect(getTransportInfo, [selectedAddess]);
+
+  useEffect(getTransportInfo, [userAddressFlexStatus]);
 
   const swapInputDivs = () => {
     const newFlexDirection =
@@ -95,24 +108,6 @@ const Search = () => {
     const userSelectedAddress = `${properties.label}::${geometry.coordinates[1]},${geometry.coordinates[0]}`;
     setSelectedAddress(userSelectedAddress);
     setAddresses([]);
-  };
-
-  const getTransportInfo = () => {
-    const { efficodeAddress } = config;
-    if (selectedAddess) {
-      let fromAddress;
-      let toAddress;
-      if (userAddressFlexStatus === 'up') {
-        fromAddress = selectedAddess;
-        toAddress = efficodeAddress;
-      } else if (userAddressFlexStatus === 'bottom') {
-        fromAddress = efficodeAddress;
-        toAddress = selectedAddess;
-      }
-      getTransportInfosFromServer({
-        variables: { fromAddress: fromAddress, toAddress: toAddress },
-      });
-    }
   };
 
   return (
