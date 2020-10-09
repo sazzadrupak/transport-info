@@ -14,4 +14,4 @@ COPY . /app
 
 RUN npm run build
 
-CMD serve -p $PORT
+CMD serve -p $PORT -s dist
