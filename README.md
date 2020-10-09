@@ -66,3 +66,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### HEROKU container registry
+
+If you are using a third party CI/CD platform, you can push images to the registry. First authenticate with the following information:
+
+Registry URL: registry.heroku.com
+Username: your Heroku email address
+Email: your Heroku email address
+Password: your Heroku API key
