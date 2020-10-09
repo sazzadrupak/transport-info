@@ -10,15 +10,16 @@ env:
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 
-before_script:
-  - docker-compose build
-  - docker-compose up -d
+# before_script:
+#   - docker-compose build
+#   - docker-compose up -d
 
+# script:
+#   - docker exec -it transport_info /bin/sh -c "npm run lint"
+
+# after_success:
+#   # - docker-compose down
 script:
-  - docker exec -it transport_info /bin/sh -c "npm run lint"
-
-after_success:
-  - docker-compose down
   - docker build -t rupak08012/transport_info:latest -t rupak08012/transport_info:$SHA ./app
   - docker tag rupak08012/transport_info registry.heroku.com/$HEROKU_APP_NAME/web
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
