@@ -4,11 +4,12 @@ import { QUERY_GET_TRANSPORTS } from '../graphql/queries';
 import { useLazyQuery } from 'react-apollo';
 import Addresses from './addresses';
 import config from '../config';
+import TransportResult from './transportResult';
 
 const Search = () => {
   const [
     getTransportInfosFromServer,
-    // { loading, data: transportInfos, error },
+    { data: transportInfos},
   ] = useLazyQuery(QUERY_GET_TRANSPORTS, {
     context: {
       headers: {
@@ -164,6 +165,9 @@ const Search = () => {
         </div>
         <div className="col col-lg-1"></div>
       </div>
+      {transportInfos && (
+        <TransportResult />
+      )}
     </div>
   );
 };
