@@ -10,4 +10,6 @@ RUN npm install
 
 COPY . /app
 
-CMD ["npm", "run", "build"]
+RUN npm run build
+
+CMD serve -p $PORT
