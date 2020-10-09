@@ -1,21 +1,21 @@
 version: '3.7'
 
 services:
-  app:
-    container_name: app
+  transport_info:
+    image: transport_info
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev
+    container_name: transport_info
     stdin_open: true
     ports:
       - target: 3000
         published: 3000
         protocol: tcp
         mode: host
-    build:
-      context: .
     volumes:
       - '/app/node_modules'
-      - '.:/app'
-    environment:
-      - NODE_ENV=development
+      - './app:/app'
     networks:
       - webnet
 networks:

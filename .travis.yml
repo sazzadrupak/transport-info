@@ -15,11 +15,11 @@ before_script:
   - docker-compose up -d
 
 script:
-  - docker exec -it app /bin/sh -c "npm run lint"
+  - docker exec -it transport_info /bin/sh -c "npm run lint"
 
 after_success:
   - docker-compose down
-  - docker build -t rupak08012/transport_info:latest -t rupak08012/transport_info:$SHA ./
+  - docker build -t rupak08012/transport_info:latest -t rupak08012/transport_info:$SHA ./app
   - docker tag rupak08012/transport_info registry.heroku.com/$HEROKU_APP_NAME/web
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
