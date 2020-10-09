@@ -4,6 +4,7 @@ const TransportResult = () => {
   return (
     <ul className="nav nav-tabs">
       <li className="nav-item">
+        BUS
         {/* <a className="nav-link active">Active</a> */}
       </li>
       <li className="nav-item">
