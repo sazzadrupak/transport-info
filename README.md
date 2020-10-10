@@ -1,77 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Time tables of routes in Helsinki Region from Efficode office to users selected address and vice versa.
 
-## Available Scripts
+## Tools and Technologies
+  1. React js
+  2. Bootstrap 4 UI framework
+  3. Eslint for linting code
+  4. Graphql for query to server
+  5. Docker for containerization
+  6. Travis CI for a CI/CD deployment pipeline
+  7. Heroku cloud
 
-In the project directory, you can run:
+## Run project without docker locally
+  1. Go to the app directory from terminal which is `/transport-info/app`
+  2. Install package.json dependencies by this command `npm install`
+  3. Run the application by this command `npm start`
+  4. Application will be available at this url [http://localhost:3000](http://localhost:3000)
+  5. To run lint test, keep inside `/transport-info/app` directory and run `npm lint` from terminal
 
-### `npm start`
+## Run project with docker
+  1. Go to the root directory from terminal which is transport-info
+  2. Run this command `docker-compose up --build`
+  3. After successful run, project will be containerized and availabe at this url [http://localhost:3000](http://localhost:3000)
+  4. To run lint test, first run this command `docker exec -it transport_info /bin/sh` (N.B. transport_info is the container name). This command will take you to the inside of `transport_info` container
+  5. Now in the bash, run this command `npm run lint`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Heroku cloud url
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-### HEROKU container registry
-
-If you are using a third party CI/CD platform, you can push images to the registry. First authenticate with the following information:
-
-Registry URL: registry.heroku.com
-Username: your Heroku email address
-Email: your Heroku email address
-Password: your Heroku API key
+  With the help of Travis CI, this project has been deployed on to heroku cloud.
+  1. The project is containerized and the image is pushed to both docker hub and heroku registry.
+  2. docker hub url for this project image is available at [docker hub](https://hub.docker.com/repository/docker/rupak08012/transport_info)
+  3. Project url in heroku is available here [transport info](https://public-transport-info.herokuapp.com/).
