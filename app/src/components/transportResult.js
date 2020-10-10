@@ -19,18 +19,19 @@ const TransportResult = (props) => {
           <span style={{ marginLeft: "25%" }}>
             <FontAwesomeIcon icon={faChevronRight} />
           </span>
-          <span className="badge badge-info">{distanceInKM(item.distance)}</span>
         </p>
-        {index !== 0 &&
-          <p>{item.from.name}</p>
-        }
-        {/* <h5>
-          {distanceInKM(item.distance)}
-        </h5> */}
+        <p>
+          {index !== 0 &&
+
+            <span className="badge badge-light">{item.from.name}</span>
+          }
+          <span className="badge badge-light" style={{ marginLeft: "40%" }}>{distanceInKM(item.distance)}</span>
+        </p>
+
       </div>
       {count === (index + 1) &&
         <div style={{ float: "left", width }} key={item.startTime}>
-          <p><b>{unixToDateTime(item.startTime)}</b></p>
+          <p><b>{unixToDateTime(item.endTime)}</b></p>
           <p>
             <FontAwesomeIcon icon={faMapPin} />
           </p>
