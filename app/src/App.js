@@ -25,7 +25,7 @@ function App() {
     <ApolloProvider client={client}>
       <React.Fragment>
         <NavBar />
-        <main className="container">
+        <main className="container-fluid">
           <Switch>
             <Route path="/" component={Search}></Route>
             <Route path="/not-found" component={NotFound}></Route>

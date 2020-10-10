@@ -27,3 +27,7 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.list-group {
+  width: 100%;
+}

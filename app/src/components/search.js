@@ -173,11 +173,10 @@ const Search = () => {
             addresses={addresses}
           />
         )}
-
-        {transportInfos && (
-          <TransportResult plans={transportInfos.plan.itineraries} />
-        )}
       </div>
+      {transportInfos && (
+        <TransportResult plans={transportInfos.plan.itineraries} />
+      )}
       {loading || searching ?
         <div id="loader">
           <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
