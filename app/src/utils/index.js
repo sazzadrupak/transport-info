@@ -1,3 +1,4 @@
+import { faWalking, faSubway, faBus, faShip, faTrain } from '@fortawesome/free-solid-svg-icons';
 export const unixToDateTime = (unix_timestamp) => {
   var date = new Date(unix_timestamp);
   var hours = date.getHours();
@@ -34,15 +35,15 @@ export const getDateTime = () => {
 }
 
 export const routesIcons = {
-  'WALK': 'male',
-  'BUS': 'bus',
-  'RAIL': 'train',
-  'TRAM': 'train',
-  'FERRY': 'ship',
-  'SUBWAY': 'subway'
+  'WALK': faWalking,
+  'BUS': faBus,
+  'RAIL': faTrain,
+  'TRAM': faTrain,
+  'FERRY': faShip,
+  'SUBWAY': faSubway
 }
 
 export const distanceInKM = (distance) => {
   const kmValue = (distance < 1000) ? `${Math.round(distance)} meters` : `${Math.round(distance / 1000)} km`;
-  return `Distance: ${kmValue}`;
+  return kmValue;
 }

@@ -1,6 +1,8 @@
 // import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { QUERY_GET_TRANSPORTS } from '../graphql/queries';
 import { useLazyQuery } from 'react-apollo';
 import Addresses from './addresses';
@@ -124,9 +126,9 @@ const Search = () => {
 
   return (
     <React.Fragment>
-      <div className="container">
+      <div className="container" style={{ padding: "20px" }}>
         <div className="row">
-          <div className="col col-lg-11">
+          <div className="col col-lg-9">
             <form>
               <div
                 id="search-inputs"
@@ -158,12 +160,8 @@ const Search = () => {
               </div>
             </form>
           </div>
-          <div className="col col-lg-1" style={{ lineHeight: '80px' }}>
-            <i
-              className="fa fa-exchange align-middle"
-              onClick={() => swapInputDivs()}
-              aria-hidden="true"
-            ></i>
+          <div className="col col-lg-3" style={{ lineHeight: '80px' }}>
+            <FontAwesomeIcon icon={faExchangeAlt} onClick={() => swapInputDivs()} />
           </div>
         </div>
 

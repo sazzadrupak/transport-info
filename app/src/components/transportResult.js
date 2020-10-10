@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faMapPin } from '@fortawesome/free-solid-svg-icons';
 import { unixToDateTime, routesIcons, distanceInKM } from '../utils';
 
 const TransportResult = (props) => {
@@ -8,23 +10,29 @@ const TransportResult = (props) => {
     let width = (Number(100 / (count + 1)).toFixed(2) - 1) + "%";
     return <React.Fragment key={index} >
       <div style={{ float: "left", width }}>
+        <p><b>{unixToDateTime(item.startTime)}</b></p>
         <p>
-          <b>{unixToDateTime(item.startTime)}</b><br />
-          <span>{item.from.name}</span>
-          <span style={{ paddingLeft: '10px' }}>
-            <i className={`fa fa-${routesIcons[item.mode]} fa-2x`} aria-hidden="true"></i>
-            <b style={{ paddingLeft: '10px' }}>{item.route ? item.route.shortName : ''}</b>
+          <span style={{ marginLeft: '10px' }}>
+            <FontAwesomeIcon icon={routesIcons[item.mode]} />
           </span>
+          <span className="badge badge-success" style={{ marginLeft: '10px' }}>{item.route ? item.route.shortName : ''}</span>
+          <span style={{ marginLeft: "25%" }}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </span>
+          <span className="badge badge-info">{distanceInKM(item.distance)}</span>
         </p>
-        <h5>
+        {index !== 0 &&
+          <p>{item.from.name}</p>
+        }
+        {/* <h5>
           {distanceInKM(item.distance)}
-        </h5>
+        </h5> */}
       </div>
       {count === (index + 1) &&
         <div style={{ float: "left", width }} key={item.startTime}>
+          <p><b>{unixToDateTime(item.startTime)}</b></p>
           <p>
-            <b>{unixToDateTime(item.endTime)}</b><br />
-            <span>{item.to.name}</span>
+            <FontAwesomeIcon icon={faMapPin} />
           </p>
         </div>
       }
