@@ -1,15 +1,17 @@
 // import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
+import Loader from 'react-loader-spinner';
 import { QUERY_GET_TRANSPORTS } from '../graphql/queries';
 import { useLazyQuery } from 'react-apollo';
 import Addresses from './addresses';
 import config from '../config';
 import TransportResult from './transportResult';
+import { getDateTime } from '../utils';
 
 const Search = () => {
   const [
     getTransportInfosFromServer,
-    { data: transportInfos},
+    { loading, data: transportInfos },
   ] = useLazyQuery(QUERY_GET_TRANSPORTS, {
     context: {
       headers: {
@@ -19,6 +21,7 @@ const Search = () => {
     },
   });
 
+  const [searching, setSearching] = useState(false);
   const [addresses, setAddresses] = useState([]);
   const [compareTerm, setCompareTerm] = useState('');
   const [term, setTerm] = useState('');
@@ -42,7 +45,7 @@ const Search = () => {
     const search = async () => {
       if (term && debouncedTerm && compareTerm !== term) {
         setAddresses([]);
-
+        setSearching(true);
         const DEFAULT_QUERY = debouncedTerm;
         fetch(config.addressUrl + DEFAULT_QUERY)
           .then((response) => response.json())
@@ -52,6 +55,7 @@ const Search = () => {
                 return element;
               });
               setAddresses(addressList);
+              setSearching(false);
             }
           });
       } else {
@@ -79,8 +83,15 @@ const Search = () => {
         fromAddress = efficodeAddress;
         toAddress = selectedAddess;
       }
+      console.log(selectedAddess);
+
       getTransportInfosFromServer({
-        variables: { fromAddress: fromAddress, toAddress: toAddress },
+        variables: {
+          fromAddress: fromAddress,
+          toAddress: toAddress,
+          date: getDateTime.date,
+          time: getDateTime.time
+        },
       });
     }
   };
@@ -112,63 +123,68 @@ const Search = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col col-lg-11">
-          <form>
-            <div
-              id="search-inputs"
-              style={{
-                display: 'flex',
-                flexDirection,
-              }}
-            >
-              <div className="form-group" id="fixed">
-                <input
-                  type="text"
-                  className="form-control"
-                  aria-describedby="emailHelp"
-                  value="Pohjoinen Rautatiekatu 25"
-                  disabled
-                />
-              </div>
+    <React.Fragment>
+      <div className="container">
+        <div className="row">
+          <div className="col col-lg-11">
+            <form>
+              <div
+                id="search-inputs"
+                style={{
+                  display: 'flex',
+                  flexDirection,
+                }}
+              >
+                <div className="form-group" id="fixed">
+                  <input
+                    type="text"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                    value="Pohjoinen Rautatiekatu 25"
+                    disabled
+                  />
+                </div>
 
-              <div className="form-group" id="variable">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="address_input"
-                  placeholder={placeholder}
-                  value={term}
-                  onChange={(e) => setTerm(e.target.value)}
-                />
+                <div className="form-group" id="variable">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="address_input"
+                    placeholder={placeholder}
+                    value={term}
+                    onChange={(e) => setTerm(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+          <div className="col col-lg-1" style={{ lineHeight: '80px' }}>
+            <i
+              className="fa fa-exchange align-middle"
+              onClick={() => swapInputDivs()}
+              aria-hidden="true"
+            ></i>
+          </div>
         </div>
-        <div className="col col-lg-1" style={{ lineHeight: '80px' }}>
-          <i
-            className="fa fa-exchange align-middle"
-            onClick={() => swapInputDivs()}
-            aria-hidden="true"
-          ></i>
-        </div>
+
+        {addresses.length > 0 && (
+          <Addresses
+            onAddressSelect={handleAddressSelect}
+            addresses={addresses}
+          />
+        )}
+
+        {transportInfos && (
+          <TransportResult plans={transportInfos.plan.itineraries} />
+        )}
       </div>
-      <div className="row">
-        <div className="col col-lg-11">
-          {addresses.length > 0 && (
-            <Addresses
-              onAddressSelect={handleAddressSelect}
-              addresses={addresses}
-            />
-          )}
+      {loading || searching ?
+        <div id="loader">
+          <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
         </div>
-        <div className="col col-lg-1"></div>
-      </div>
-      {transportInfos && (
-        <TransportResult />
-      )}
-    </div>
+        : null
+      }
+    </React.Fragment>
   );
 };
 

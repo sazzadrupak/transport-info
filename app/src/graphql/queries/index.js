@@ -5,18 +5,15 @@ export const QUERY_GET_TRANSPORTS = gql`
     plan(
       fromPlace: $fromAddress
       toPlace: $toAddress
-      numItineraries: 5
       transportModes: [
         { mode: BUS }
         { mode: RAIL }
         { mode: TRAM }
         { mode: FERRY }
         { mode: WALK }
-      ]
-      walkReluctance: 2.1
-      walkBoardCost: 300
-      minTransferTime: 600
-      walkSpeed: 1.7
+        { mode: SUBWAY}
+      ],
+      numItineraries: 5
     ) {
       itineraries {
         walkDistance
@@ -25,6 +22,9 @@ export const QUERY_GET_TRANSPORTS = gql`
           mode
           startTime
           endTime
+          route {
+            shortName
+          }
           from {
             lat
             lon
