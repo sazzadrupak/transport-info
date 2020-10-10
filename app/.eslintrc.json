@@ -13,9 +13,7 @@
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "react/prop-types": 0,
-    "no-unused-vars": "off",
-    "no-undef": "off"
+    "react/prop-types": 0
   },
   "parser": "babel-eslint",
   "settings": {

@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -129,36 +128,34 @@ const Search = () => {
       <div className="container" style={{ padding: "20px" }}>
         <div className="row">
           <div className="col col-lg-9">
-            <form>
-              <div
-                id="search-inputs"
-                style={{
-                  display: 'flex',
-                  flexDirection,
-                }}
-              >
-                <div className="form-group" id="fixed">
-                  <input
-                    type="text"
-                    className="form-control"
-                    aria-describedby="emailHelp"
-                    value="Pohjoinen Rautatiekatu 25"
-                    disabled
-                  />
-                </div>
-
-                <div className="form-group" id="variable">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address_input"
-                    placeholder={placeholder}
-                    value={term}
-                    onChange={(e) => setTerm(e.target.value)}
-                  />
-                </div>
+            <div
+              id="search-inputs"
+              style={{
+                display: 'flex',
+                flexDirection,
+              }}
+            >
+              <div className="form-group" id="fixed">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="emailHelp"
+                  value="Pohjoinen Rautatiekatu 25"
+                  disabled
+                />
               </div>
-            </form>
+
+              <div className="form-group" id="variable">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address_input"
+                  placeholder={placeholder}
+                  value={term}
+                  onChange={(e) => setTerm(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
           <div className="col col-lg-3" style={{ lineHeight: '80px' }}>
             <FontAwesomeIcon icon={faExchangeAlt} onClick={() => swapInputDivs()} />

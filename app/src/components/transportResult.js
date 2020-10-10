@@ -22,7 +22,6 @@ const TransportResult = (props) => {
         </p>
         <p>
           {index !== 0 &&
-
             <span className="badge badge-light">{item.from.name}</span>
           }
           <span className="badge badge-light" style={{ marginLeft: "40%" }}>{distanceInKM(item.distance)}</span>

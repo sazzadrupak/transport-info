@@ -12,7 +12,6 @@
     "apollo-boost": "^0.4.9",
     "bootstrap": "^4.4.1",
     "graphql": "^15.3.0",
-    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
@@ -23,7 +22,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "lint": "eslint --ext js src",
+    "lint": "eslint src",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
