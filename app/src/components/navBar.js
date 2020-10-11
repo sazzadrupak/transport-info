@@ -4,7 +4,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        Transport Info ping
+        Transport Info
       </Link>
       <button
         className="navbar-toggler"

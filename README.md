@@ -27,8 +27,9 @@ Time tables of routes in Helsinki Region from Efficode office to users selected 
 
   With the help of Travis CI, this project has been deployed on to heroku cloud.
   1. The project is containerized and the image is pushed to both docker hub and heroku registry.
-  2. docker hub url for this project image is available at [docker hub](https://hub.docker.com/repository/docker/rupak08012/transport_info)
-  3. Project url in heroku is available here [transport info](https://public-transport-info.herokuapp.com/).
+  2. Only the lint test is checked before deployment.
+  3. docker hub url for this project image is available at [docker hub](https://hub.docker.com/repository/docker/rupak08012/transport_info)
+  4. Project url in heroku is available here [transport info](https://public-transport-info.herokuapp.com/).
 
 ## Missing items
   1. A good UI
